@@ -1,10 +1,13 @@
 import './App.css'
+import Home from './components/home'
 
-function App() {
+const App = () => {
   return (
     <>
-    <h1>My app</h1>
+      <h1>Media Library</h1>
+      <Home />
     </>
+
   )
 }
 
