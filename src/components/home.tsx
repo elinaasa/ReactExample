@@ -1,9 +1,9 @@
-import {MediaItem} from '@sharedTypes/DBTypes';
+import {useState} from 'react';
+import {MediaItem} from '../types/DBTypes';
 import MediaRow from './MediaRow';
 
-
 const Home = () => {
-
+  const [selectedItem, setSelectedItem] = useState<MediaItem | undefined>();
   const mediaArray: MediaItem[] = [
     {
       media_id: 8,
@@ -40,26 +40,35 @@ const Home = () => {
       created_at: '2024-01-07T20:48:13.000Z',
     },
   ];
+  //console.log(mediaArray);
+
   return (
     <>
-    <h2>My Media</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Thumbnail</th>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Created</th>
-          <th>Size</th>
-          <th>Type</th>
-        </tr>
-      </thead>
-      <tbody>
-        {mediaArray.map((item) => <MediaRow item={item} />)}
-      </tbody>
-    </table>
-  </>
-);
+      <h2>My Media</h2>
+      <p>{selectedItem?.media_id}</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Thumbnail</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Created</th>
+            <th>Size</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          {mediaArray.map((item) => (
+            <MediaRow
+              key={item.media_id}
+              item={item}
+              setSelectedItem={setSelectedItem}
+            />
+          ))}
+        </tbody>
+      </table>
+    </>
+  );
 };
 
 export default Home;
